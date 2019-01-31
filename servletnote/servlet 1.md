@@ -24,14 +24,14 @@
 3. 在首页上找到Example
 4. 选择servlet例子 ---> Request Parameter
 
-![icon](img01.png)
+![icon](img00/img01.png)
 接着点击Request  Parameters 的Execute超链接
 
-![icon](img02.png)
+![icon](img00/img02.png)
 
 执行tomcat的例子，然后查看浏览器和tomcat服务器的对接细节
 
-![icon](img03.png)
+![icon](img00/img03.png)
 
 ###Http请求数据解释 
 
@@ -126,7 +126,7 @@
 
 ##Get 和  Post请求区别
 
-![icon](img04.png)
+![icon](img00/img04.png)
 
 * post
 
