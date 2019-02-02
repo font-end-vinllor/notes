@@ -128,11 +128,9 @@
 ![icon](img/img05.png)
 
 2. 建立一个HTML文件，该页面用于登录 
- 
 ![icon](img/img01.png)
 
 3. 建立一个LoginServlet类作为服务器端响应客户端,判断账号密码的正误跳转到不一样的页面
-
 ![icon](img/img02.png)
 
 ###  1. Status Code Definitions  HTTP状态代码定义(普及)
@@ -163,7 +161,8 @@
 		public Object getAttribute(String name)
 		返回具有给定名称的 servlet 容器属性，如果不具有该名称的属性，则返回 null。属性允许 servlet 容器将此接口还没有提供的额外信息提供给 servlet。
 	    public void setAttribute(String name, Object object)
-		将对象绑定到此 servlet 上下文中的给定属性名称。如果已将指定名称用于某个属性，则此方法将使用新属性替换具有该名称的属性。 
+		将对象绑定到此 servlet 上下文中的给定属性名称。如果已将指定名称用于某个属性，则此方法将使用新属性替换具有该名称的属性。
+ 
 ![icon](img/img07.png)
 
 class CountServlet
