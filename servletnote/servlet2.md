@@ -128,10 +128,10 @@
 ![icon](img/img05.png)
 
 2. 建立一个HTML文件，该页面用于登录 
-![icon](img/img01.png)
+![icon](img/img01.PNG)
 
 3. 建立一个LoginServlet类作为服务器端响应客户端,判断账号密码的正误跳转到不一样的页面
-![icon](img/img02.png)
+![icon](img/img02.PNG)
 
 ###  1. Status Code Definitions  HTTP状态代码定义(普及)
 1. 消息1xx（informational 1xx）
@@ -149,7 +149,8 @@
 > 表示服务器端发现自己出现错误，不能继续执行请求。
 
 ###2.  Location(setHeader(name,value))
-![icon](img/img06.png)
+
+![icon](img/img06.PNG)
 
 ###3.  Servlet 注解@webServlet
 > 用于将一个类声明为Servlet,该注解将会在部署时被容器处理，容器根据具体的属性配置将相应的类部署为Servlet.其中value属性和urlPatterns属性通常必备，且二者不能共存，如果同时指定，会被忽略掉。
@@ -163,11 +164,11 @@
 	    public void setAttribute(String name, Object object)
 		将对象绑定到此 servlet 上下文中的给定属性名称。如果已将指定名称用于某个属性，则此方法将使用新属性替换具有该名称的属性。
  
-![icon](img/img07.png)
+![icon](img/img07.PNG)
 
 class CountServlet
 
-![icon](img/img08.png)
+![icon](img/img08.PNG)
 
 login.html
 
