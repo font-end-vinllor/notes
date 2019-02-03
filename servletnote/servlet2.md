@@ -127,25 +127,27 @@
 1. 需求
 ![icon](img/img05.png)
 
-2. 建立一个HTML文件，该页面用于登录 
+2. 建立一个HTML文件，该页面用于登录
+ 
 ![icon](img/img01.PNG)
 
 3. 建立一个LoginServlet类作为服务器端响应客户端,判断账号密码的正误跳转到不一样的页面
 ![icon](img/img02.PNG)
 
 ###  1. Status Code Definitions  HTTP状态代码定义(普及)
-1. 消息1xx（informational 1xx）
+* 1. 消息1xx（informational 1xx）
+
 > 该类代码表示临时回应
 
-2. 成功2xx(Successful 2xx)
+* 2. 成功2xx(Successful 2xx)
 > 表示客服端请求被成功接收，理解，接收
 
-3. 3xx 重定向(Redirection 3xx)
+* 3. 3xx 重定向(Redirection 3xx)
 > 表示用户代理要想完成请求，还需要发出进一步的操作
 
-4. 4xx 客户端错误（Client Error 4xx）
+* 4.4xx 客户端错误（Client Error 4xx）
 
-5. 服务器错误(Server Error 5xx)
+* 5.服务器错误(Server Error 5xx)
 > 表示服务器端发现自己出现错误，不能继续执行请求。
 
 ###2.  Location(setHeader(name,value))
@@ -260,6 +262,7 @@ login.html
 * 如果是GET方式
 	
 	1. 代码转码
+	
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			
@@ -315,6 +318,18 @@ login.html
 
 
 
+		PrintWriter writer = resp.getWriter();
+		//这里写出去默认是ISO-8859-1，需要指定写给客户端时用什么编码写
+		//1. 指定输出到客户端时，这些文字使用什么编码
+		//resp.setCharacterEncoding("gb2312");
+		//上面要是和浏览器的编码不一样，还是会乱码的
+		//2. 直接规定浏览器使用什么编码看这份数据	
+		resp.setHeader("Content-Type", "text/html;charset=UTF-8");
+		
+		writer.write("靳飞虎");
+
+
+
 * 以字节流输出 
 
 > response.getOutputStream()
@@ -326,14 +341,119 @@ login.html
 		response.setHeader("Content-Type", "text/html;charset=UTF-8");
 		
 		//2. 指定输出的中文用的码表
+		在getBytes()方法里指定输出的编码格式。
 		response.getOutputStream().write("我爱深圳黑马训练营..".getBytes("UTF-8"));
 
 
 		--------------------------------------------
+    	
+		String类的getBytes()方法默认的编码格式是：GBK
+		String name = Charset.defaultCharset().name();
+		System.out.println("默认的字符编码是: "+name);
 
+		谷歌浏览器默认的编码是GBK.
+		
 ###不管是字节流还是字符流，直接使用一行代码就可以了。
-
+	设置响应的数据类型是html文本，并告诉浏览器使用UTF-8编码
 	response.setContentType("text/html;charset=UTF-8");
 
 	然后在写数据即可。
-        	
+
+###演练下载资源
+
+1. 直接以超链接的方式下载，不写任何代码。
+
+			  让tomcat的默认servlet去提供下载：
+			<h2>文件查看</h2>
+			<a href = "download/img01.jpg">爱猫</a>
+			<a href = "download/web.txt">飞飞</a>
+			<a href = "download/jinwenmin.zip">压缩文件</a>
+![icon](img/img09.png)
+
+> 原因：tomcat里面有一个默认的Servlet --- DefaultServlet.这个DefaultServlet专门用于处理放在tomcat服务器上的静态资源。
+
+2. 用Servlet实现资源的下载
+				
+							<hr>
+				<a href = "Download?filename=img01.jpg">爱猫</a>
+				<a href = "Download?filename=web.txt">飞飞</a>
+				<a href = "Download?filename=jinwenmin.zip">压缩文件</a>
+		
+
+
+        		@WebServlet("/Download")
+						protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+				String filename = request.getParameter("filename");
+			    String path = getServletContext().getRealPath("/download/"+filename);
+			    
+			    //让浏览器收到资源的时候，以提示框的形式出现
+				response.setHeader("Content-Disposition", "attachment;filename"+filename);
+				
+				
+			    InputStream in = new FileInputStream(path);
+				OutputStream out = response.getOutputStream();
+				int len = 0;
+				byte[] buff = new byte[1024];
+				while((len = in.read(buff)) != -1) {
+					out.write(buff,0,len);
+				}
+				out.close();
+				in.close();
+				
+			}
+![icon](img/imh010.png)
+![icon](img/img011.png)
+
+##总结
+
+1. Servlet注册方式 
+
+2. ServletContext【重点】
+
+		作用：
+	
+			1. 获取全局参数
+		
+			2. 获取工程里面的资源。
+		
+			3. 资源共享。  ServletContext 域对象
+	
+		有几个 一个 
+	
+		什么时候创建 ？ 什么时候销毁
+	
+		服务器启动的时候给每一个应用都创建一个ServletContext对象， 服务器关闭的时候销毁
+
+	简单登录
+
+3. HttpServletRequest【重点】
+
+		1. 获取请求头
+	
+		2. 获取提交过来的数据
+
+	
+	
+
+4. HttpServletResponse【重点】
+
+		负责输出数据到客户端，其实就是对之前的请求作出响应
+
+5. 中文乱码问题。【重点】
+
+6. 下载
+
+
+###作业：
+
+	
+	1. 完成注册 
+
+	2. 完成登录
+
+![icon](img/img12.png)
+
+---------------------------------------
+
+V1.1 最好配合上数据库，完成注册和登录的功能。 
+	
