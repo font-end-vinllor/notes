@@ -318,17 +318,17 @@ login.html
 
 
 
-		PrintWriter writer = resp.getWriter();
+	
 		//这里写出去默认是ISO-8859-1，需要指定写给客户端时用什么编码写
 		//1. 指定输出到客户端时，这些文字使用什么编码
 		//resp.setCharacterEncoding("gb2312");
 		//上面要是和浏览器的编码不一样，还是会乱码的
 		//2. 直接规定浏览器使用什么编码看这份数据	
 		resp.setHeader("Content-Type", "text/html;charset=UTF-8");
-		
+		PrintWriter writer = resp.getWriter();
 		writer.write("靳飞虎");
 
-
+> 注意先设置编码方式，在回去输出流
 
 * 以字节流输出 
 
