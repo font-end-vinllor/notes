@@ -299,4 +299,90 @@ ${对象名.成员}
 全局初始化参数
 
 - initParam
+
+## JSTL
+
+> 全程 : JSP Standard Tag Library  jsp标准标签库
+
+> 用途 ： 简化JSP的代码编写 ， 替换<%%>写法，一般与EL表达式配合使用。
+
+### 怎么使用
+
+1. 导入jar文件到工程的webContent/Web-Inf/lib    jstl.jar   standard.jar  
+2.  在JSP页面上， 使用taglib 指令 ， 来引入标签。
+3.  注意： 如果想支持EL表达式 ， 那么引入的标签库必须选择1.1的版本 ， 1.0 的版本不支持EL表达式 。 
+
+				<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+## 常用属性
+
+			<c:set></c:set>
+		   <c:if test=""></c:if>
+		   <c:forEach></c:forEach>
+					
+* <c:set></c:set>
+> 用于存一个值到作用域里面，作用域默认是pageContext
+
+			<c:set var="name" value="jinfeihu" scope="session"></c:set>
+   			${sessionScope.name }
+
+				var  变量名
+				value  值
+				scope   所存的作用域
+
+* <c:if test = ""></c:if>
+> 与EL表达式结合 ， 用于做判断  以及可以把判断的结果保存在一个变量中，进而把变量保存在一个作用域中。
+
+							<c:set var="age" value="19"></c:set>
+			   <c:if test="${age > 18}">
+			        <br>我家靳飞虎------<br>
+			   </c:if>
+			   
+			   <c:if test="${age <= 20 }" var="result">
+			   
+			   我家靳飞虎年龄小于20<br>
+			   </c:if>
+			   ${result }
+结果：
 			
+				jinfeihu 
+				我家靳飞虎------
+				我家靳飞虎年龄小于20
+			    true 
+
+
+* <c:forEach var="" items="" step=""></c:forEach>
+> 用于遍历
+				
+							简单遍历<br>
+				   <c:forEach begin="1" end="8" var="i">
+				   ${i }
+				   </c:forEach>
+				   
+				   <br>遍历集合<br>
+				   <%
+				   List list = new ArrayList() ;
+				   list.add(new User("jinfei",19));
+				   list.add(new User("jinwen",20));
+				   list.add(new User("jinzhi",15));
+				   pageContext.setAttribute("list", list);
+				   
+				   %>
+				   <!-- var  遍历的每一个元素
+				   items   遍历哪一个对象  和EL表达式结合 将对象从作用域中取出来
+				   step  增幅为多少 -->
+				   <c:forEach var="user" items="${list }" step="" >
+				  ${user.name}----${user.age } <br>
+				   
+				   </c:forEach>
+
+结果： 
+
+					简单遍历
+					1 2 3 4 5 6 7 8 
+					遍历集合
+					jinfei----19 
+					 jinwen----20 
+					 jinzhi----15 
+				   
+				   
