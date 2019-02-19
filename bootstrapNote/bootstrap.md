@@ -524,33 +524,399 @@ kbd风格：
 
 			role是一个html5的属性，role="form"告诉辅助设备（如屏幕阅读器）这个元素所扮演的角色是个表单，在button中role="button"就是
 			告诉设备，这是个按钮，可以点击。本质上是增强语义性，增强组件的可访问性、可用性和可交
-			<form class="form-horizontal" role="form">
-			  <div class="form-group">
-			    <label for="inputEmail3" class="col-sm-2 control-label">邮箱</label>
-			    <div class="col-sm-10">
-			      <input type="email" class="form-control" id="inputEmail3" placeholder="请输入您的邮箱地址">
-			    </div>
-			  </div>
-			  <div class="form-group">
-			    <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
-			    <div class="col-sm-10">
-			      <input type="password" class="form-control" id="inputPassword3" placeholder="请输入您的邮箱密码">
-			    </div>
-			  </div>
-			  <div class="form-group">
-			    <div class="col-sm-offset-2 col-sm-10">
-			      <div class="checkbox">
-			        <label>
-			          <input type="checkbox"> 记住密码
-			        </label>
-			      </div>
-			    </div>
-			  </div>
-			  <div class="form-group">
-			    <div class="col-sm-offset-2 col-sm-10">
-			      <button type="submit" class="btn btn-default">进入邮箱</button>
-			    </div>
-			  </div>
-			</form> 
-						
+		<!--水平表单  -->
+			<form role="form" class="form-horizontal">
+				<div class="form-group">
+					<!-- 俩个class类名使文字完全显示出 -->
+					<label for="1" class="col-sm-2 control-label">邮箱</label>
+					<!-- col-sm-10使input框完全显示 -->
+					<div class="col-sm-10">
+					<input type="email" id="1" placeholder="请输入你的邮箱" class="form-control">
+				</div>
+				</div>
+				<div class="form-group">
+					<label for="2" class="control-label col-sm-2">密码</label>
+					<div class="col-sm-10">
+					<input type="password" id="2" class="form-control" placeholder="请输入你的密码">
+				</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+					<div class="checkbox">
+					<label>
+						<input type="checkbox">记住密码
+					</label>
+					</div>
+				</div>
+				</div>
+				<button type="submit" class="btn btn-default">进入邮箱</button>
+			</form>
+
+### 内联表单
+> 在bootstrap中实现内联表单，只需要在&lt;form&gt;元素中添加类名-----".form-inline"-----。<b>如果要在input前面添加一个label标签时，将会导致input换行显示，如果必须添加这样一个标签，并且不想让input换行，需要将label标签放在form-group容器里面。
+
+怎么用？
 			
+			div class="form-group">
+			    <label class="sr-only" for="exampleInputEmail2">Email address</label>
+			</div>
+			<div class="form-group">
+			    <inputtype="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
+			</div>
+						
+
+<font color="red" size=4>类名".sr-only" , 标签没显示就是该样式将标签隐藏了。</font>
+
+###表单控件（输入框input）
+> 为了让控件在各种表单风格中样式都不出错，需添加类名----".form-control"------
+
+怎么用？
+		
+		<form role="form">
+		  <div class="form-group">
+		    <input type="email" class="form-control" placeholder="Enter email">
+		    <input type="text" class="form-control" placeholder="Enter text">
+		  </div>
+		</form> 
+
+###表单控件（下拉选择框select）
+>bootstrap中和原始一样，多行选择设置multiple属性值为multiple.
+			
+			<form role="form">
+			<div class="form-group">
+			  <select class="form-control">
+			    <option>1</option>
+			    <option>2</option>
+			    <option>3</option>
+			    <option>4</option>
+			    <option>5</option>
+			  </select>
+			  </div>
+			  <div class="form-group">
+			  <select multiple class="form-control">
+			    <option>1</option>
+			    <option>2</option>
+			    <option>3</option>
+			    <option>4</option>
+			    <option>5</option>
+			  </select>
+			</div>
+			</form>
+
+### 表单控件（文本域textarea）
+> ros定义高度，cols定义宽度。如果添加了类名---".form-control"----,则不需要设置cols属性。bootstrap中".form-control"样式的控件宽度为100%或auto.
+
+		<form role="form">
+		  <div class="form-group">
+		    <textarea class="form-control" rows="3"></textarea>
+		  </div>
+		</form>
+
+### 表单控件（复选框checkbox和单选框radio）
+>bootstrap框架中checkbox和radio有一些特殊，因此做了一些特殊化的处理.
+
+> checkbox radio 和label标签配合使用的时候会出现对齐问题。以下解决办法：
+			
+			<form role="form">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" value="">
+						记住密码
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" name="optionsRadios" id="optionsRadios1" value="love" checked>
+						喜欢
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" name="optionsRadios" id="optionsRadios2" value="hate">
+						不喜欢
+					</label>
+				</div>
+			</form>
+
+1. checkbox radio都用label包起来了
+2. checkbox连同label标签放置在名为<b>".checkbox"</b>的容器内
+3. radio连同label标签放置在<b>.radio</b>的容器内
+4. 通过俩个容器的样式解决对齐问题。
+
+### 表单控件（复选框和单选按钮水平排列）
+1. 如果checkbox需水平排列，只要在label标签上添加类名".checkbox-inline"
+2. 如果radio需水平排列，只需要在label标签上添加类名".radio-inline"
+						
+			<form role="form">
+			  <div class="form-group">
+			    <label class="checkbox-inline">
+			      <input type="checkbox"  value="option1">游戏
+			    </label>
+			    <label class="checkbox-inline">
+			      <input type="checkbox"  value="option2">摄影
+			    </label>
+			    <label class="checkbox-inline">
+			    <input type="checkbox"  value="option3">旅游
+			    </label>
+			  </div>
+			  <div class="form-group">
+			    <label class="radio-inline">
+			      <input type="radio"  value="option1" name="sex">男性
+			    </label>
+			    <label class="radio-inline">
+			      <input type="radio"  value="option2" name="sex">女性
+			    </label>
+			    <label class="radio-inline">
+			      <input type="radio"  value="option3" name="sex">中性
+			    </label>
+			  </div>
+			</form>
+
+### 表单控件（按钮）
+
+		☑  input[type=“submit”]
+
+  		☑  input[type=“button”]
+
+ 	    ☑  input[type=“reset”]
+
+  		☑  <button>
+
+###表单控件的大小
+> 可以通过设置控件的height,line-height,padding,font-size...来实现控件的高度设置。在bootstrap中，提供了俩个类名，来控制表单控件的高度。
+
+1. input-sm:让控件比正常大小更小
+2. input-lg:让控件比正常大小更大
+
+<font color="red">适用于input, textarea , select</font>
+
+怎么用？
+		
+		<form role="form">
+				<div class="form-group">
+					<label>
+					
+					账户名：<input type="text" name="name" class="form-control input-lg" placeholder="请输入你的账户名">
+					</label>
+				</div>
+				<div class="form-group">
+					<label>
+						密码：<input type="text" name="password" class="form-control input-xs" placeholder="请输入你的密码">
+					</label>
+				</div>
+			</form>
+![icon](img/input-lg-xs.PNG)
+
+> 需要改变控件宽度的时候，要借助bootstrap框架的<b>网格系统</b>
+
+怎么用？
+
+		<!--改变控件的宽度  -->
+	<form role="form" class="form-horizontal">
+		<div class="form-group">
+			<div class="col-xs-4">					
+					<input type="text" class="input-lg form-control" name="name" placeholder="col-xs-4">				
+			</div>
+			<div class="col-xs-6">				
+					<input type="text" class="input-lg form-control" name="password" placeholder="col-xs-6">				
+			</div>
+			<div class="col-xs-7">				
+					<input type="text" class="form-control input-lg" name="other" placeholder="col-xs-7">				
+			</div>
+		</div>
+	</form> 
+
+![icon](img/col-xs.PNG)
+
+### 表单控件状态（焦点状态）
+
+状态的作用：
+> 向用户传递不同的信息，表单有焦点的状态告诉用户可以输入或者选择东西； 禁用状态用户不可以输入和选择东西； 表单控件的验证状态，告诉用户的操作是否正确。
+
+> 焦点状态是通过伪类“:focus” 来实现 。 bootstrap框架中表单控件的焦点状态删除了outline的默认样式，重新添加阴影效果。
+
+> 要让控件在焦点状态下有上面样式，需要给控件添加类名----".form-control"------（可以看到蓝色边框效果）
+
+> 在bootstrap框架中，file , radio , checkbox控件在焦点状态下的效果和普通的input不太一样
+
+
+####1 . 表单控件状态（禁用状态）
+> bootstrap框架中表单控件的禁用状态和普通表单一样，在相应的表单控件上添加属性---“disabled”。 和其他表单的禁用状态不同的是，bootstrap框架做了一些样式风格的处理：
+
+怎么用？
+		
+	   <input class="form-control" type="text" placeholder="表单已禁用，不能输入" disabled>
+![icon](img/disabled.PNG)
+
+		使用了form-control表单控件，样式设置了禁用状态的表单控件背景色为灰色，而且手型变为了禁止手型。  如果不适用该类名 ， 没有手型。
+
+* 在bootstrap框架中，如果<font color=red>fieldset</font>设置了disabled属性，整个域将会处于禁用状态。
+* 例外：在整个被禁用的域里面，如果legend中有输入框的话，这个输入框无法被禁用。
+
+		<form role="form">
+				<fieldset disabled>
+					<legend>
+						legend:<input type="email" class="form-control input-lg" placeholder="被禁用的legend" >
+					</legend>
+					<div class="form-group">
+						<label>
+							<input type="text" class="form-control input-lg" placeholder="被禁用的文本框" >
+						</label>
+					</div>
+				
+				
+				</fieldset>
+
+![icon](img/legend.PNG)
+
+#### 2 . 表单控件状态（验证状态）
+验证状态样式
+
+1. .has-warning : 警告状态 (黄色)
+2. .has-error : 错误状态 （红色）
+3. .has-success : 成功状态 (绿色)
+
+怎么用？ 使用时只需要在form-group容器上对应添加状态类名。
+
+		<!-- 控件的状态 -->
+			<form role="form">
+				<div class="form-group has-warning col-xs-7">
+					<label for="10">账户名</label>
+					<input type="text" class="form-control input-lg" id="10" placeholder="警告状态">
+				</div>
+				<div class="form-group has-error col-xs-7">
+					<label for="11">密码</label>
+					<input type="password" class="form-control input-lg" id="11" placeholder="错误状态">
+				</div>
+				<div class="form-group has-success col-xs-7">
+					<label for="12">邮箱</label>
+					<input type="email" class="form-control input-lg" id="12" placeholder="成功状态">
+				</div>
+			</form> 
+![icon](img/status.PNG)
+
+> 如果想给每种状态一个icon，只需要在对应的状态下添加类名----“.has-feedback”-----类名要与对应的状态的类名放在一起。  其次必须在表单中添加span元素。<font color=red>图标无法显示</font>
+
+		<span class="glyphicon glyphicon-ok form-control-feedback"></span>
+
+		<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+
+		<span class="glyphicon glyphicon-remove form-control-feedback"></span> 
+
+### 表单提示信息
+> 在bootstrap中，使用一个----".help-block"样式，将提示信息以块状显示，并且控制在控件的地底部。
+
+怎么用？
+		
+		<form role="form">
+		<div class="form-group has-success has-feedback">
+		  <label class="control-label" for="inputSuccess1">成功状态</label>
+		  <input type="text" class="form-control" id="inputSuccess1" placeholder="成功状态" >
+		  <span class="help-block">你输入的信息是正确的</span>
+		  <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+		</div> 
+		</form>
+
+# 按钮
+### 1. 基本按钮
+怎么用？
+
+		<button type="button" class="btn">我是一个基本按钮</button>
+
+### 2 . 默认按钮
+> 在基础按钮的风格上修改了背景颜色，边框颜色，文本颜色
+
+怎么用?
+
+	<button type="button" class="btn btn-default"></button>
+
+多标签支持
+> 在Bootstrap框架中制作按钮时，除了刚才所说的这些标签元素之外，还可以使用在其他的标签元素上，唯一需要注意的是，要在制作按钮的标签元素上添加类名“btn”。如果不添加是不会有任何按钮效果。
+		
+		<button class="btn btn-default" type="button">button标签按钮</button>
+		<input type="submit" class="btn btn-default" value="input标签按钮"/>
+		<a href="##" class="btn btn-default">a标签按钮</a>
+		<span class="btn btn-default">span标签按钮</span>
+		<div class="btn btn-default">div标签按钮</div>
+
+###3 . 定制风格按钮
+> 通过不同的类名来实现
+
+![icon](img/btn.jpg)
+![icon](img/btn1.jpg)
+
+怎么用？
+在基础按钮“.btn” 后追加对应的类名
+		
+		<button class="btn" type="button">基础按钮.btn</button>  
+		   <button class="btn btn-default" type="button">默认按钮.btn-default</button> 
+		   <button class="btn btn-primary" type="button">主要按钮.btn-primary</button> 
+		   <button class="btn btn-success" type="button">成功按钮.btn-success</button> 
+		    <button type="button" class="btn btn-info">信息按钮</button>
+		   <button class="btn btn-warning" type="button">警告按钮.btn-warning</button> 
+		   <button class="btn btn-danger" type="button">危险按钮.btn-danger</button> 
+		   <button class="btn btn-link" type="button">链接按钮.btn-link</button> 
+
+### 按钮的大小
+![icon](img/size.jpg)
+怎么用？
+在基础按钮后加类名
+		
+		<button class="btn btn-primary btn-lg" type="button">大型按钮.btn-lg</button> 
+		    <button class="btn btn-primary" type="button">正常按钮</button>
+		    <button class="btn btn-primary btn-sm" type="button">小型按钮.btn-sm</button>
+		     <button type="button" class="btn btn-success btn-xs">超小按钮</button>
+
+### 块状按钮
+> 当需要按钮的宽度填充父容器的时候，使用bootstrap框架提供的一个类名-----“.btn-clock”-----，并且该按钮不会有任何的padding和margin值
+
+怎么用?
+
+		<button class="btnbtn-primary btn-lg btn-block" type="button">大型按钮.btn-lg</button>
+
+###按钮状态--活动状态
+1. 悬浮状态（：hover）
+2. 点击状态（:active）
+3. 焦点状态（：focus）
+
+###按钮状态--禁用状态
+> 禁用状态和其他状态按钮相比，就是背景颜色的透明度做了处理，opcity值从100%调整为65%。
+
+在bootstrap框架中 ， 要禁用按钮有俩种实现方式：
+
+1. 在标签中添加disabled属性
+2. 在元素标签中添加类名disabled
+
+区别：
+---
+		“.disabled”样式不会禁止按钮的默认行为，比如说提交和重置行为等。如果想要让这样的禁用按钮也能禁止按钮的默认行为，则需要通过JavaScript这样的语言来处理。对于<a>标签也存在类似问题，如果通过类名“.disable”来禁用按钮，其链接行为是无法禁止。而在元素标签中添加“disabled”属性的方法是可以禁止元素的默认行为的。
+
+# 图像
+> bootstrap框架中图像的样式风格有以下：
+
+1. img-responsive:响应式图片 ， 主要是针对于响应式设计
+2. img-rounded : 圆角图片
+3. img-circle : 圆形图片
+4. img-thumbnail : 缩略图片
+
+怎么用？
+只需要在&lt;img&gt;标签上添加对应的类名。
+		
+		<img  alt="140x140" src="http://placehold.it/140x140">
+		<img  class="img-rounded" alt="140x140" src="http://placehold.it/140x140">
+		<img  class="img-circle" alt="140x140" src="http://placehold.it/140x140">
+		<img  class="img-thumbnail" alt="140x140" src="http://placehold.it/140x140">
+		<img  class="img-responsive" alt="140x140" src="http://placehold.it/140x140">
+
+设置图片大小：
+
+> 由于样式没有对图片做大小上的样式限制，所以在实际使用的时候，需要通过其他的方式来处理图片大小。比如说控制图片容器大小。（注意不可以通过css样式直接修改img图片的大小，这样操作就不响应了）
+
+# 图标
+		
+		<span class="glyphicon glyphicon-search"></span>
+			<span class="glyphicon glyphicon-asterisk"></span>
+			<span class="glyphicon glyphicon-ok"></span>
+			<span class="glyphicon glyphicon-cloud"></span>
+
+![icon](img/icon.jpg)
