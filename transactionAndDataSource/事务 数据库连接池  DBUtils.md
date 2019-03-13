@@ -244,3 +244,103 @@ Oracle  默认的隔离级别是  读已提交
 
 3. 使用装饰者模式
 
+![icon](img/10.PNG)
+![icon](img/11.PNG)
+
+# 数据库连接池
+
+* DBCP
+> 需要导入dbcp.jar   pool.jar
+
+  1. 不使用配置文件
+
+			1 构建数据源对象
+			  BasicDataSource database = new BasicDataSource();
+			2 得到连接对象
+			  conn = database.getConnection();
+
+ 2. 使用配置文件 	
+
+			1 BasicDataSourceFactory factory = new BasicDataSourceFactory();
+			2 Properties pro = new Properties();
+			3 InputStream in = new FileInputStream("src//dbcpconfig.properties");
+		 	4 pro.load(in);
+			5 DataSource dataSource = factory.creatDataSource(pro);
+
+			6  得到连接对象
+
+* C3P0
+> 导入c3p0.jar
+
+1. 不适用配置文件
+
+			1 创建DataSource
+				ComboPooledDataSource dataSource = new ComboPooledDataSource();
+
+			2 dataSource.setDriverClass()
+			 ...
+
+		    3  得到连接对象
+
+2. 使用配置文件
+> 有两种配置方式 1  properties属性文件  2 c3p0-config.xml配置（名字一定）
+![icon](img/12.PNG)
+
+## DBUtils
+> 导入dbutils.jar,简化了CRUD的代码，连接的工作还是自己做
+* 增删改
+		
+		ComboPooledDataSource dataSource = new ComboPooledDataSource();
+
+		QueryRunner qr = new QueryRunner(dataSource);
+		String sql = "";
+		qr.update(sql,params...); 
+
+* 查询
+匿名实现类
+		查询一个
+		qr.query(sql,new ResultSetHandler<Account>(){
+			public Account handle(ResultSet rs)throws SQLException{
+			Account account = new Account();
+			while(ra.next()){
+				String name = rs.getString("name");
+				int money = rs.getInt("money");
+				//自己手动封装
+				account.setName(name);
+				account.setMoney(money);
+			}
+		return account;
+			}
+
+
+			},params);
+
+
+
+			改
+
+        直接用框架已经实现好的类
+		qr.query(sql,new BeanHandler<Account>(Account,class),params)
+
+
+		qr.query(sql,new BeanListHandler<Account>(Account.class),params) 
+
+## ResultSetHandler  常用的实现类
+
+	ArrayHandler, //查询到的单个数据封装成一个数组
+
+	ArrayListHandler,//查询到的多个数据封装成一个集合，集合里面装的是数组
+
+	BeanHandler  ////查询到的单个数据封装成一个对象
+
+	BeanListHandler//查询到的多个数据封装成一个List对象
+
+	MapHandler, //查询到的单个数据封装成一个map
+
+	MapListHandler, ////查询到的多个数据封装成一个集合，集合里面装的元素是map.
+ 
+
+ColumnListHandler,
+KeyedHandler,
+ScalarHandler	 // 查询有多少个	
+		
