@@ -456,6 +456,50 @@ userCustom类中属性名和上边查询列名不一致。
 
 > 如果查询出来的列名和pojo中的属性名不一致，通过定义一个resultMap对列名和pojo属性名之间做一个映射关系。
 
+# 动态sql
+
+## if语句
+
+![icon](img/45.PNG)
+
+## sql片段
+
+* 定义sql片段
+> 将sql判断代码块抽取出来，组成一个sql片段，其他的statement可以引用它。
+
+![icon](img/46.PNG)
+
+* 使用sql片段
+> 在定义的mapper.xml中的statement引用sql片段
+
+## foreach语句
+
+> 向sql传递数组或者list,mybatis使用foreach解析
+
+需求
+
+在用户查询列表和列表总数的statement中增加多个id输入查询。  
+sql语句如下：
+两种方法：  
+1. SELECT * FROM user WHERE id =1 or id = 10 or id=16;
+
+2. SELECT * FROM user WHERE id in(1,10,16);
+
+![icon](img/48.PNG)
+
+* 测试
+
+![icon](img/49.PNG)
+
+![icon](img/50.PNG)
+
+
+
+
+
+
+
+
 
 
 
