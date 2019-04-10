@@ -43,3 +43,40 @@
 * 使用构造方法实例化  
 * 使用静态工厂实例化  
 * 使用实例工厂方法实例化
+
+## 依赖注入bean属性（手动装配，使用xml配置）
+### 参数注入
+
+- 构造方法注入
+     1. 通过参数名
+     2. 通过索引
+
+- setter方法往bean里面注入
+- p命名空间注入（了解） 
+
+
+### 集合注入
+
+- list注入
+- set注入
+- map注入
+- properties注入
+ 
+### 数组注入 
+   
+
+# springEL表达式
+			
+			<property id="" value="#{表达式}"></property>
+			#{123}、#{'jack'} ： 数字、字符串
+			#{beanId}	：另一个bean引用
+			#{beanId.propName}	：操作数据
+			#{beanId.toString()}	：执行方法
+			#{T(类).字段|方法}	：静态方法或字段
+
+# 注解注入
+
+- @component("id")  /@component
+
+* 未使用注解时的action-service-dao-model
+* 使用注解时的action-service-dao-model
