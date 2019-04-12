@@ -80,3 +80,14 @@
 
 * 未使用注解时的action-service-dao-model
 * 使用注解时的action-service-dao-model
+
+
+#AOP
+
+### AOP实现原理
+
+* 原理： AOP底层将采用代理机制进行实现
+
+* 两种技术：
+	1. 接口+实现类： spring 采用jdk的动态代理proxy
+	2. 实现类： spring采用cglib字节码增强。
